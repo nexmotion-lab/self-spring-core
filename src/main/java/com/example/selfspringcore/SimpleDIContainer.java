@@ -15,19 +15,18 @@ public class SimpleDIContainer {
         ComponentScanner scanner = new ComponentScanner();
         List<Class<?>> classes = scanner.scanPackage(basePackage); // 스캔이 된 클래스 보관
 
-        System.out.println("classes = " + classes);
+        System.out.println("1. classes = " + classes);
 
         // First pass: Create instances for classes with no-args constructor
         // 기본 생성자만 가진 클래스는 의존성 주입이 필요 없기에 미리 객체 생성
         for (Class<?> clazz : classes) {
             try {
-
                 // 기본 생성자인 경우
                 // class.getConstructors() := 해당 클래스의 생성자를 가져온다 -> length = 생성자 개수
                 if (clazz.getConstructors().length == 1 && clazz.getConstructors()[0].getParameterCount() == 0) {
                     Object instance = clazz.newInstance(); // 인스턴스 생성해 객체 생성
                     beans.put(clazz, instance);
-                    System.out.println("Created no-args instance of " + clazz.getName()); // Debugging line
+                    System.out.println("2. Created no-args instance of " + clazz.getName()); // Debugging line
                 }
             } catch (Exception e) {
                 throw new RuntimeException("Error during no-args bean instantiation for " + clazz.getName(), e);
@@ -51,7 +50,7 @@ public class SimpleDIContainer {
                             }
                             Object instance = constructor.newInstance(params); // 파라미터 객체를 기반으로 인스턴스 생성
                             beans.put(clazz, instance);
-                            System.out.println("Created args-based instance of " + clazz.getName()); // Debugging line
+                            System.out.println("3. Created args-based instance of " + clazz.getName()); // Debugging line
                         }
                     }
                 } catch (Exception e) {
@@ -63,7 +62,7 @@ public class SimpleDIContainer {
     }
 
     public <T> T getBean(Class<T> clazz) {
-        System.out.println("beans = " + beans);
+        System.out.println("4. beans = " + beans);
         return clazz.cast(beans.get(clazz));
     }
 

@@ -13,14 +13,20 @@ public class ComponentScanner {
 
     public List<Class<?>> scanPackage(String basePackage) throws Exception{
 
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader(); // 현재 스레드의 클래스로더 반환
-        String path = basePackage.replace('.', '/'); // org.example -> org/example
-        Enumeration<URL> resources = classLoader.getResources(path); // file:/Users/minwoo/IdeaProjects/.../org/example
-        List<File> dirs = new ArrayList<>();
+        // 현재 스레드를 기준으로 ClassLoader 반환
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        // 프로젝트 리소스를 기준으로 검색하기 위해 basePackage 경로에서 .를 /로 변환 ex)com.example -> com/example
+        String path = basePackage.replace('.', '/');
+        // classLoader의 getResources 메소드는 검색하는 리소스 명으로 된 모든 리소스를 찾고, 리소스 명은 리소스를 식별하는
+        // '/'로 구분 된 경로들로 열겨형 데이터인 Enumeration으로 리턴
+        // file:/Users/minwoo/IdeaProjects/.../org/example
+        Enumeration<URL> resources = classLoader.getResources(path);
 
+        List<File> dirs = new ArrayList<>();
+        // Enumeration은 열거형 데이터로 cursor의 위치를 통해 객체를 반환
         while (resources.hasMoreElements()) {
             URL resource = resources.nextElement();
-            // dirs에 /users ... /org/example까지의 경로를 보관
+            // dirs에 /users ... /com/example까지의 경로를 보관
             dirs.add(new File(resource.getFile())); // resource.getFile() := /Users/minwoo/IdeaProjects/.../org/example
         }
 
