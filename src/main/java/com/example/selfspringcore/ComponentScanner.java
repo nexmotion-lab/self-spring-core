@@ -70,7 +70,7 @@ public class ComponentScanner {
 
     private static boolean isComponent(Class<?> cls) {
         Set<Class<?>> visited = new HashSet<>();
-        return isComponentRecursive(cls, visited); // 무한 루프 방지
+        return isComponentRecursive(cls, visited); // 재귀이므로 스택 오버 플로우 방지
     }
 
     private static boolean isComponentRecursive(Class<?> cls, Set<Class<?>> visited) {
