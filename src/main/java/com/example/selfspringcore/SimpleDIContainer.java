@@ -65,6 +65,4 @@ public class SimpleDIContainer {
         System.out.println("4. beans = " + beans);
         return clazz.cast(beans.get(clazz));
     }
-
-
 }
