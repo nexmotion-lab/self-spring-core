@@ -9,5 +9,11 @@ public class SelfspringcoreApplication {
         ControllerB controllerB = container.getBean(ControllerB.class);
         System.out.println("5. controllerB : " + controllerB);
 
+        // Servlet Test
+        System.out.println("\n// Servlet Test");
+        Hello hello = new Hello();
+        hello.setData("hello");
+        String data = hello.getData();
+        System.out.println("hello test : data = " + data);
     }
 }

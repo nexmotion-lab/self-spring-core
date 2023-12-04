@@ -9,10 +9,7 @@ import java.util.*;
 
 public class ComponentScanner {
 
-
-
     public List<Class<?>> scanPackage(String basePackage) throws Exception{
-
         // 현재 스레드를 기준으로 ClassLoader 반환
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         // 프로젝트 리소스를 기준으로 검색하기 위해 basePackage 경로에서 .를 /로 변환 ex)com.example -> com/example
