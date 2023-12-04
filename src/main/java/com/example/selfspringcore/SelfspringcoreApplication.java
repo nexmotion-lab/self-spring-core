@@ -1,6 +1,7 @@
 package com.example.selfspringcore;
 
 import com.example.selfspringcore.controller.ControllerB;
+import javax.servlet.Servlet;
 
 public class SelfspringcoreApplication {
     public static void main(String[] args) throws Exception{
