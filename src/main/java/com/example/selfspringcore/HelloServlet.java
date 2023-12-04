@@ -1,12 +1,13 @@
 package com.example.selfspringcore;
 
+
 import java.io.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-
+// custom annotation으로는 오류가 남
+//import com.example.selfspringcore.annotation.WebServlet;
 
 @WebServlet(name = "helloServlet", value = "/hello-servlet")
-//@WebServlet(name = "helloServlet", value = "/hello-servlet")
 public class HelloServlet extends HttpServlet {
     private String message;
 
